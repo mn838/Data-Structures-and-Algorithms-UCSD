@@ -17,21 +17,20 @@ double get_optimal_value( int capacity, vector<int> weights, vector<int> values 
 
   for( int i = 0; i < weights.size(); i++ ) {
     double value_per_weight = (double)values[i] / (double)weights[i] ;
-    umap.push_back(std::make_pair(value_per_weight, weights[i])) ;
+    umap.push_back(std::make_pair(value_per_weight, i)) ;
   }
 
   sort( umap.begin(), umap.end(), comp ) ;
 
-  int iter = 0 ;
-  while ( capacity > 0 && umap.size() != 0 ) {
-    if( umap[iter].first < capacity ) {
-      value += umap[iter].first * umap[iter].second ;
-      capacity -= umap[iter].second ;
-      umap.erase(umap.begin() + iter) ;
-    } else {
-      value += capacity * umap[iter].first ;
-      capacity = 0 ;
+
+  for( int i = 0; i < umap.size(); i++ ) {
+    int i_sorted = umap[i].second ;
+    if( capacity == 0 ) {
+      return value ;
     }
+    int capacity_remaining = std::min(weights[i_sorted], capacity) ;
+    capacity -= capacity_remaining ;
+    value += capacity_remaining * umap[i].first ;
   }
 
   // write your code here
