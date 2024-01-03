@@ -9,7 +9,7 @@ int gcd_naive( int a, int b ) {
       }
     }
   }
-  return current_gcd;
+  return current_gcd ;
 }
 
 int gcd_fast( int a, int b ) {
