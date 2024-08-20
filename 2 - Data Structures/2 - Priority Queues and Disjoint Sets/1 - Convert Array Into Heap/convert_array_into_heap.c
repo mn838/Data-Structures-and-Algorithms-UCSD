@@ -97,5 +97,10 @@ int main()
         printf("%d %d\n", swap_i[i], swap_j[i]) ;
     }
 
+    free(h->heap_arr) ;
+    free(h) ;
+    free(swap_i) ;
+    free(swap_j) ;
+
     return 0 ;
 }
